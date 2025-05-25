@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class PaywallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
@@ -163,14 +165,84 @@ class PaywallScreen extends StatelessWidget {
                 SizedBox(height: 20.sp),
                 CarouselSlider(
                   items: [
-                    carouselItem(
-                        "assets/images/john_anderson.png", "John Anderson",
-                        "Their attention to detail and creative design approach transformed our website into a visually stunning and highly functional platform. We’ve seen a 30% increase in traffic since the relaunch. I highly recommend them to anyone seeking professional web design services!")
+                    Obx(
+                            () {
+                          return carouselItem(
+                              "assets/images/john_anderson.png",
+                              "John Anderson",
+                              "Their attention to detail and creative design approach transformed our website into a visually stunning and highly functional platform. We’ve seen a 30% increase in traffic since the relaunch. I highly recommend them to anyone seeking professional web design services!",
+                              getController.currentCarouselIndex.value == 0);
+                        }
+                    ),
+                    Obx(
+                            () {
+                          return carouselItem(
+                              "assets/images/john_anderson.png",
+                              "John Anderson",
+                              "Their attention to detail and creative design approach transformed our website into a visually stunning and highly functional platform. We’ve seen a 30% increase in traffic since the relaunch. I highly recommend them to anyone seeking professional web design services!",
+                              getController.currentCarouselIndex.value == 1);
+                        }
+                    ),
+                    Obx(
+                            () {
+                          return carouselItem(
+                              "assets/images/john_anderson.png",
+                              "John Anderson",
+                              "Their attention to detail and creative design approach transformed our website into a visually stunning and highly functional platform. We’ve seen a 30% increase in traffic since the relaunch. I highly recommend them to anyone seeking professional web design services!",
+                              getController.currentCarouselIndex.value == 2);
+                        }
+                    ),
+                    Obx(
+                            () {
+                          return carouselItem(
+                              "assets/images/john_anderson.png",
+                              "John Anderson",
+                              "Their attention to detail and creative design approach transformed our website into a visually stunning and highly functional platform. We’ve seen a 30% increase in traffic since the relaunch. I highly recommend them to anyone seeking professional web design services!",
+                              getController.currentCarouselIndex.value == 3);
+                        }
+                    ),
                   ],
                   options: CarouselOptions(
-                      viewportFraction: 0.6,
-                      height: 0.2.sh,
-                      enlargeCenterPage: true),)
+                      viewportFraction: 0.7,
+                      height: 0.27.sh,
+                      enlargeCenterPage: true, onPageChanged: (value, reason) {
+                    getController.currentCarouselIndex.value = value.toDouble();
+                  }),),
+                SizedBox(height: 10.sp),
+                Obx(
+                        () {
+                      return DotsIndicator(
+                        dotsCount: 4,
+                        position: getController.currentCarouselIndex.value,
+                        decorator: DotsDecorator(
+                          color: AppColors.lessLightGreyColor,
+                          // Inactive color
+                          activeColor: AppColors.purpleColor,
+                          activeSize: Size(30.0.sp, 9.0.sp),
+                          size: Size(9.0.sp, 9.0.sp),
+                          activeShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0)),
+                        ),
+                      );
+                    }
+                ),
+                SizedBox(height: 10.sp),
+                Row
+                  (
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Cancel Anytime*", style: TextStyle(
+                        fontSize: 12.sp, color: AppColors.textBlackColor),),
+                  ],),
+                SizedBox(height: 20.sp),
+                fourOptionsButton("What does this course include?"),
+                fourOptionsButton(
+                    "Can I access the course content after completing it?"),
+                fourOptionsButton(
+                    "Are there any prerequisites for this course?"),
+                fourOptionsButton(
+                    "Will I get a certificate after completing the course?"),
+
               ],
             ),
           ),
@@ -206,30 +278,117 @@ class PaywallScreen extends StatelessWidget {
     );
   }
 
-  Widget carouselItem(String image, String name, String description) {
-    return Card(child: Padding(
-      padding:  EdgeInsets.all(16.0.sp),
-      child: Column(children: [
-        Row(children: [
-          CircleAvatar(
-            radius: 20.sp,
-            backgroundImage: AssetImage(image),
+  Widget carouselItem(String image, String name, String description,
+      bool border) {
+    return border? Container(
+      margin: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 8.sp),
+      padding: EdgeInsets.all(1.sp),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [Color(0xFF292D32), Colors.white],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 3,
+              blurRadius: 8,
+              offset: const Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.0.sp),
+          child: Column(children: [
+            Row(children: [
+              CircleAvatar(
+                radius: 20.sp,
+                backgroundImage: AssetImage(image),
+              ),
+              SizedBox(width: 8.sp),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: TextStyle(
+                      fontSize: 13.sp, fontWeight: FontWeight.w700),),
+                  RatingBar.readOnly(filledIcon: Icons.star,
+                      emptyIcon: Icons.star_border,
+                      initialRating: 4,
+                      filledColor: AppColors.purpleColor,
+                      maxRating: 4,
+                      size: 10.sp
+                  )
+                ],)
+            ],),
+            SizedBox(height: 8.sp),
+            Text(description, style: TextStyle(fontSize: 8.sp),)
+          ],),
+        ),),
+    ): Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 0), // changes position of shadow
           ),
-          SizedBox(width: 8.sp),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            Text(name, style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w700),),
-            RatingBar.readOnly(filledIcon: Icons.star,
-                emptyIcon: Icons.star_border,
-                initialRating: 4,
-                filledColor: AppColors.purpleColor,
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(16.0.sp),
+        child: Column(children: [
+          Row(children: [
+            CircleAvatar(
+              radius: 20.sp,
+              backgroundImage: AssetImage(image),
+            ),
+            SizedBox(width: 8.sp),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name, style: TextStyle(
+                    fontSize: 13.sp, fontWeight: FontWeight.w700),),
+                RatingBar.readOnly(filledIcon: Icons.star,
+                    emptyIcon: Icons.star_border,
+                    initialRating: 4,
+                    filledColor: AppColors.purpleColor,
+                    maxRating: 4,
+                    size: 10.sp
+                )
+              ],)
+          ],),
+          SizedBox(height: 8.sp),
+          Text(description, style: TextStyle(fontSize: 8.sp),)
+        ],),
+      ),);
+  }
 
-                maxRating: 4
-            )
-          ],)
-        ],)
-      ],),
-    ), color: Colors.white,);
+  Widget fourOptionsButton(String title) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 6,
+            blurRadius: 8,
+            offset: const Offset(0, 0), // changes position of shadow
+          ),
+        ],
+      ),
+      child: ListTile(
+        title: Text(title, style: TextStyle(fontSize: 14.sp),),
+        trailing: Icon(Icons.chevron_right, color: AppColors.purpleColor,),
+      ),);
   }
 }
