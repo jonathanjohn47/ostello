@@ -295,7 +295,7 @@ class PaywallScreen extends StatelessWidget {
                       });
                     }
                 ),
-                SizedBox(height: 20.sp),
+                SizedBox(height: 2.sp),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 16.0.sp),
                   child: Row(
@@ -303,7 +303,7 @@ class PaywallScreen extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () {},
-                            child: Text("Subscribe Now", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),),
+                            child: Text("Subscribe Now", style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w900),),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.purpleColor,
                               // Or Colors.purple
@@ -313,7 +313,7 @@ class PaywallScreen extends StatelessWidget {
                                     10.r),
 
                               ),
-                              padding: EdgeInsets.all(16.sp)
+                              padding: EdgeInsets.all(10.sp)
                             )),
                       ),
                     ],
@@ -483,13 +483,13 @@ class PaywallScreen extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(
-                horizontal: 16.sp, vertical: recommended ? 24.sp : 15.sp),
-            padding: EdgeInsets.all(8.sp),
+                horizontal: 16.sp, vertical: recommended ? 14.sp : 8.sp),
+            padding: EdgeInsets.all(2.sp),
             decoration: BoxDecoration(
               border: Border.all(
                 color: isSelected ? AppColors.purpleColor : AppColors
                     .lightGreyColor,
-                width: 2.0.sp,
+                width: 0.8.sp,
               ),
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.r),
@@ -517,14 +517,14 @@ class PaywallScreen extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight
-                      .w600),),
+                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight
+                      .w700),),
               ),
               Text(
                 "₹$discountedPrice",
                 style: TextStyle(
                     color: AppColors.purpleColor,
-                    fontSize: 20.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600
 
 
@@ -532,12 +532,13 @@ class PaywallScreen extends StatelessWidget {
               SizedBox(width: 8.sp),
               Text("₹$originalPrice", style: TextStyle(
                 decoration: TextDecoration.lineThrough,
-                fontSize: 12.sp,
+                fontSize: 9.sp,
                 fontWeight: FontWeight.w600,
-              ),)
+              ),),
+              SizedBox(width: 8.sp),
             ],),),
           !recommended ? Positioned(
-            top: 6.sp,
+            top: 1.sp,
             right: 50.sp,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 3.sp),
@@ -545,21 +546,21 @@ class PaywallScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24.r),
                 border: Border.all(
-                  color: AppColors.purpleColor, // Your border color
-                  width: 1.0, // Border thickness
+                  color: AppColors.purpleColor,
+                  width: 1.0,
                 ),
               ),
               child: Text(
                 "₹$perDayPrice per day",
                 style: TextStyle(
                   color: AppColors.purpleColor,
-                  fontSize: 8.sp,
+                  fontSize: 6.sp,
                 ),
               ),
             )
             ,
 
-          ) : Positioned(top: recommended ? 13.sp : -3.sp,
+          ) : Positioned(top: recommended ? 6.sp : -3.sp,
               right: 50.sp,
               child: Container(
                 decoration: BoxDecoration(
@@ -567,7 +568,7 @@ class PaywallScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(24.r),
                   border: Border.all(
                     color: AppColors.purpleColor, // Your border color
-                    width: 1.0, // Border thickness
+                    width: 0.5, // Border thickness
                   ),
                 ),
                 padding: EdgeInsets.all(4.sp), // Added padding here
@@ -592,7 +593,7 @@ class PaywallScreen extends StatelessWidget {
                         "₹$perDayPrice per day",
                         style: TextStyle(
                           color: AppColors.purpleColor,
-                          fontSize: 8.sp,
+                          fontSize: 6.sp,
                         ),
                       ),
                     ),
