@@ -16,20 +16,17 @@ class PaywallScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PixelPerfect(
-      assetPath: "assets/images/pixel_perfect.png",
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: OrientationBuilder(
-            builder: (context, orientation) {
-              if (orientation == Orientation.portrait) {
-                return mobileUi();
-              } else {
-                return webUi();
-              }
-            },
-          ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            if (orientation == Orientation.portrait) {
+              return mobileUi();
+            } else {
+              return webUi();
+            }
+          },
         ),
       ),
     );
