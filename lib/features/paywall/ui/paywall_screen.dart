@@ -242,6 +242,71 @@ class PaywallScreen extends StatelessWidget {
                     "Are there any prerequisites for this course?"),
                 fourOptionsButton(
                     "Will I get a certificate after completing the course?"),
+                SizedBox(height: 20.sp),
+                Obx(
+                        () {
+                      return paymentItem(
+                          "Monthly",
+                          "699",
+                          "999",
+                          "8.5",
+                          false,
+                          0,
+                          getController.chipSelectedIndex.value == 0, () {
+                        getController.chipSelectedIndex.value = 0;
+                      });
+                    }
+                ), Obx(
+                        () {
+                      return paymentItem(
+                          "Quarterly",
+                          "1900",
+                          "999",
+                          "6.5",
+                          true,
+                          1,
+                          getController.chipSelectedIndex.value == 1, () {
+                        getController.chipSelectedIndex.value = 1;
+                      });
+                    }
+                ), Obx(
+                        () {
+                      return paymentItem(
+                          "Full Course",
+                          "5591",
+                          "999",
+                          "4.5",
+                          false,
+                          2,
+                          getController.chipSelectedIndex.value == 2, () {
+                        getController.chipSelectedIndex.value = 2;
+                      });
+                    }
+                ),
+                SizedBox(height: 20.sp),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 16.0.sp),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text("Subscribe Now", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.purpleColor,
+                              // Or Colors.purple
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.r),
+
+                              ),
+                              padding: EdgeInsets.all(16.sp)
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
 
               ],
             ),
@@ -394,5 +459,135 @@ class PaywallScreen extends StatelessWidget {
         title: Text(title, style: TextStyle(fontSize: 14.sp),),
         trailing: Icon(Icons.chevron_right, color: AppColors.purpleColor,),
       ),);
+  }
+
+  Widget paymentItem(String title, String discountedPrice, String originalPrice,
+      String perDayPrice, bool recommended, int index, bool isSelected,
+      // Add index parameter
+      Function() onPressed) {
+    return InkWell(
+      onTap: () {
+        onPressed();
+      },
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: 16.sp, vertical: recommended ? 24.sp : 15.sp),
+            padding: EdgeInsets.all(8.sp),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isSelected ? AppColors.purpleColor : AppColors
+                    .lightGreyColor,
+                width: 2.0.sp,
+              ),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 8,
+                  offset: const Offset(0, 0), // changes position of shadow
+                ),
+              ],
+
+            ),
+            child: Row(children: [
+              Radio<int>(
+                value: index, // Use the index parameter
+                groupValue: getController.chipSelectedIndex.value,
+                onChanged: (int? value) {
+                  if (value != null) {
+                    getController.chipSelectedIndex.value = value;
+                  }
+                },
+                activeColor: AppColors.purpleColor,
+              ),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight
+                      .w600),),
+              ),
+              Text(
+                "₹$discountedPrice",
+                style: TextStyle(
+                    color: AppColors.purpleColor,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600
+
+
+                ),),
+              SizedBox(width: 8.sp),
+              Text("₹$originalPrice", style: TextStyle(
+                decoration: TextDecoration.lineThrough,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+              ),)
+            ],),),
+          !recommended ? Positioned(
+            top: -3.sp,
+            right: 50.sp,
+            child: Chip(
+              label: Text("₹$perDayPrice per day", style: TextStyle(
+                  color: AppColors.purpleColor,
+                  fontSize: 8.sp
+              ),),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24.r,),
+              ),
+              labelPadding: EdgeInsets.symmetric(
+                  horizontal: 5.sp, vertical: 0.sp),
+              side: BorderSide(
+                color: AppColors.purpleColor, // Your border color
+                width: 1.0, // Border thickness
+              ),
+              backgroundColor: Colors.white,
+              elevation: 0,
+            ),
+          ) : Positioned(top: recommended ? -0.sp : -5.sp,
+              right: 50.sp,
+              child: Chip(
+                label: Row(
+                  children: [
+                    Text(
+                      "Recommended",
+                      style: TextStyle(color: Colors.white, fontSize: 8.sp),),
+                    SizedBox(
+                        width: 5.sp),
+                    Chip(
+                      label: Text("₹$perDayPrice per day", style: TextStyle(
+                          color: AppColors.purpleColor,
+                          fontSize: 8.sp
+                      ),),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.r,),
+                      ),
+                      padding: EdgeInsets.all(
+                          0.sp),
+                      side: BorderSide(
+                        color: AppColors.purpleColor, // Your border color
+                        width: 1.0, // Border thickness
+                      ),
+                      backgroundColor: Colors.white,
+                      elevation: 0,
+                    )
+                  ],
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.r,),
+                ),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 5.sp, vertical: 0.sp),
+                side: BorderSide(
+                  color: AppColors.purpleColor, // Your border color
+                  width: 1.0, // Border thickness
+                ),
+                backgroundColor: AppColors.purpleColor,
+                elevation: 0,))
+        ],
+      ),
+    );
   }
 }
