@@ -527,65 +527,66 @@ class PaywallScreen extends StatelessWidget {
               ),)
             ],),),
           !recommended ? Positioned(
-            top: -3.sp,
+            top: 6.sp,
             right: 50.sp,
-            child: Chip(
-              label: Text("₹$perDayPrice per day", style: TextStyle(
-                  color: AppColors.purpleColor,
-                  fontSize: 8.sp
-              ),),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24.r,),
-              ),
-              labelPadding: EdgeInsets.symmetric(
-                  horizontal: 5.sp, vertical: 0.sp),
-              side: BorderSide(
-                color: AppColors.purpleColor, // Your border color
-                width: 1.0, // Border thickness
-              ),
-              backgroundColor: Colors.white,
-              elevation: 0,
-            ),
-          ) : Positioned(top: recommended ? -0.sp : -5.sp,
-              right: 50.sp,
-              child: Chip(
-                label: Row(
-                  children: [
-                    Text(
-                      "Recommended",
-                      style: TextStyle(color: Colors.white, fontSize: 8.sp),),
-                    SizedBox(
-                        width: 5.sp),
-                    Chip(
-                      label: Text("₹$perDayPrice per day", style: TextStyle(
-                          color: AppColors.purpleColor,
-                          fontSize: 8.sp
-                      ),),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24.r,),
-                      ),
-                      padding: EdgeInsets.all(
-                          0.sp),
-                      side: BorderSide(
-                        color: AppColors.purpleColor, // Your border color
-                        width: 1.0, // Border thickness
-                      ),
-                      backgroundColor: Colors.white,
-                      elevation: 0,
-                    )
-                  ],
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24.r,),
-                ),
-                padding: EdgeInsets.symmetric(
-                    horizontal: 5.sp, vertical: 0.sp),
-                side: BorderSide(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 3.sp),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24.r),
+                border: Border.all(
                   color: AppColors.purpleColor, // Your border color
                   width: 1.0, // Border thickness
                 ),
-                backgroundColor: AppColors.purpleColor,
-                elevation: 0,))
+              ),
+              child: Text(
+                "₹$perDayPrice per day",
+                style: TextStyle(
+                  color: AppColors.purpleColor,
+                  fontSize: 8.sp,
+                ),
+              ),
+            )
+            ,
+
+          ) : Positioned(top: recommended ? 13.sp : -3.sp,
+              right: 50.sp,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.purpleColor,
+                  borderRadius: BorderRadius.circular(24.r),
+                  border: Border.all(
+                    color: AppColors.purpleColor, // Your border color
+                    width: 1.0, // Border thickness
+                  ),
+                ),
+                padding: EdgeInsets.all(4.sp), // Added padding here
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Recommended",
+                      style: TextStyle(color: Colors.white, fontSize: 8.sp),
+                    ),
+                    SizedBox(width: 4.sp), // Adjust spacing as needed
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(
+                            20.r), // Make it circular if desired
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 6.sp, vertical: 2.sp),
+                      // Added padding here
+                      child: Text(
+                        "₹$perDayPrice per day",
+                        style: TextStyle(
+                          color: AppColors.purpleColor,
+                          fontSize: 8.sp,
+                        ),
+                      ),
+                    ),
+                  ],),))
         ],
       ),
     );
