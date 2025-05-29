@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'features/paywall/ui/paywall_2_screen.dart';
 import 'features/paywall/ui/paywall_screen.dart';
 
 void main() {
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             textTheme: GoogleFonts.plusJakartaSansTextTheme(),
           ),
-          home: PaywallScreen(),
+          debugShowCheckedModeBanner: true,
+          home: Paywall2Screen(),
         );
       },
     );
