@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -144,6 +145,27 @@ class Paywall2Screen extends StatelessWidget {
                 enlargeCenterPage: true, onPageChanged: (value, reason) {
               getController.currentCarouselIndex.value = value.toDouble();
             }),),
+          SizedBox(height: 12.sp),
+          Obx(
+                  () {
+                return DotsIndicator(
+                  dotsCount: 4,
+                  position: getController.currentCarouselIndex.value,
+                  fadeOutLastDot: false,
+                  fadeOutDistance: 0,
+                  animate: true,
+                  decorator: DotsDecorator(
+                    color: AppColors.lessLightGreyColor,
+                    // Inactive color
+                    activeColor: AppColors.purpleColor,
+                    activeSize: Size(30.0.sp, 7.0.sp),
+                    size: Size(7.0.sp, 7.0.sp),
+                    activeShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                );
+              }
+          ),
         ],
       ),
     );
