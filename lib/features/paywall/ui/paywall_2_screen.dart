@@ -60,9 +60,9 @@ class Paywall2Screen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.w700,
-                          letterSpacing: -0.4,
-                          height: 1.3,
-                          wordSpacing: -3,
+                          letterSpacing: -0.5,
+                          height: 1.2,
+                          wordSpacing: 0.5,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -72,10 +72,11 @@ class Paywall2Screen extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: 8.sp),
           Image.asset("assets/images/mega_offer.png", height: 190.sp,),
           SizedBox(height: 8.sp),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: (40.0)),
+            padding: EdgeInsets.symmetric(horizontal: (20.0)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -99,7 +100,7 @@ class Paywall2Screen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 8.sp),
+          SizedBox(height: 10.sp),
           CarouselSlider(
             items: [
               Obx(
@@ -140,12 +141,13 @@ class Paywall2Screen extends StatelessWidget {
               ),
             ],
             options: CarouselOptions(
-                viewportFraction: 0.6,
+                viewportFraction: 0.66,
                 height: 0.18.sh,
+                aspectRatio: 2.0,
                 enlargeCenterPage: true, onPageChanged: (value, reason) {
               getController.currentCarouselIndex.value = value.toDouble();
             }),),
-          SizedBox(height: 2.sp),
+
           Obx(
                   () {
                 return DotsIndicator(
@@ -191,7 +193,7 @@ class Paywall2Screen extends StatelessWidget {
             width: 40.sp,
           ),
         ),
-        SizedBox(height: 8.sp),
+        SizedBox(height: 2.sp),
         Text(title,
           style: TextStyle(fontSize: 10.sp),
           textAlign: TextAlign.center,)
@@ -250,48 +252,58 @@ Widget carouselItem(String image, String name, String description,
           ],),
           SizedBox(height: 8.sp),
           Text(description,
-            style: TextStyle(fontSize: 7.sp, letterSpacing: 0.2, wordSpacing: 0.2),)
+            style: TextStyle(fontSize: 7.sp, letterSpacing: 0.5, wordSpacing: 0.5),)
         ],),
       ),),
   ): Container(
+    margin: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 8.sp),
+    padding: EdgeInsets.all(1.sp),
     decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(10.r),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.2),
-          spreadRadius: 3,
-          blurRadius: 8,
-          offset: const Offset(0, 0), // changes position of shadow
-        ),
-      ],
+      gradient: LinearGradient(colors: [Color(0xFF292D32),Color(0xFF292D32), Colors.white, Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight),
+      borderRadius: BorderRadius.circular(6.r),
     ),
-    child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 10.sp),
-      child: Column(children: [
-        Row(children: [
-          CircleAvatar(
-            radius: 15.sp,
-            backgroundImage: AssetImage(image),
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 0), // changes position of shadow
           ),
-          SizedBox(width: 8.sp),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(name, style: TextStyle(
-                  fontSize: 9.5.sp, fontWeight: FontWeight.w700),),
-              RatingBar.readOnly(filledIcon: Icons.star,
-                  emptyIcon: Icons.star_border,
-                  initialRating: 4,
-                  filledColor: AppColors.purpleColor,
-                  maxRating: 4,
-                  size: 9.sp
-              )
-            ],)
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 10.sp),
+        child: Column(children: [
+          Row(children: [
+            CircleAvatar(
+              radius: 15.sp,
+              backgroundImage: AssetImage(image),
+            ),
+            SizedBox(width: 8.sp),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name, style: TextStyle(
+                    fontSize: 9.5.sp, fontWeight: FontWeight.w700),),
+                RatingBar.readOnly(filledIcon: Icons.star,
+                    emptyIcon: Icons.star_border,
+                    initialRating: 4,
+                    filledColor: AppColors.purpleColor,
+                    maxRating: 4,
+                    size: 9.sp
+                )
+              ],)
+          ],),
+          SizedBox(height: 8.sp),
+          Text(description,
+            style: TextStyle(fontSize: 6.5.sp, letterSpacing: -1.8),)
         ],),
-        SizedBox(height: 8.sp),
-        Text(description,
-          style: TextStyle(fontSize: 6.5.sp, letterSpacing: -1.8),)
-      ],),
-    ),);
+      ),),
+  );
 }
