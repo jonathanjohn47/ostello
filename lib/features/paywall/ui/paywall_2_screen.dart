@@ -169,6 +169,33 @@ class Paywall2Screen extends StatelessWidget {
                 );
               }
           ),
+          SizedBox(height: 6.sp),
+          Stack(
+            children: [
+              Container(color: Colors.white,
+                padding: EdgeInsets.symmetric( vertical: 20.sp),
+                alignment: Alignment.center,
+                child: Column(children: [
+                  SizedBox(
+                    height: 2.sp,
+                  ),
+                SizedBox(
+                  width: 0.45.sw,
+                  child: RichText(text: TextSpan(children: [
+                    TextSpan(text: "Extend 4 Days "),
+                    TextSpan(text: "Free Trial ", style: TextStyle(
+                        fontWeight: FontWeight.bold)),
+                    TextSpan(text: "for Full Access")
+                  ], style: TextStyle(fontSize: 15.sp, color: Colors.black, letterSpacing: -0.9, height: 1.3), ), textAlign: TextAlign.center,),
+                )
+                              ],),),
+              Positioned(
+                right: 0.sp,
+                  child: Image.asset(
+                "assets/images/special_discount.png", height: 35.sp,))
+
+            ],
+          )
         ],
       ),
     );
