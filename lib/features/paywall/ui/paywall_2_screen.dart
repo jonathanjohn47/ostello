@@ -141,11 +141,11 @@ class Paywall2Screen extends StatelessWidget {
             ],
             options: CarouselOptions(
                 viewportFraction: 0.6,
-                height: 0.16.sh,
+                height: 0.18.sh,
                 enlargeCenterPage: true, onPageChanged: (value, reason) {
               getController.currentCarouselIndex.value = value.toDouble();
             }),),
-          SizedBox(height: 12.sp),
+          SizedBox(height: 2.sp),
           Obx(
                   () {
                 return DotsIndicator(
@@ -160,6 +160,7 @@ class Paywall2Screen extends StatelessWidget {
                     activeColor: AppColors.purpleColor,
                     activeSize: Size(30.0.sp, 7.0.sp),
                     size: Size(7.0.sp, 7.0.sp),
+                    spacing: EdgeInsets.symmetric(horizontal: 2.0.sp),
                     activeShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0)),
                   ),
@@ -249,7 +250,7 @@ Widget carouselItem(String image, String name, String description,
           ],),
           SizedBox(height: 8.sp),
           Text(description,
-            style: TextStyle(fontSize: 6.5.sp, letterSpacing: -0.7, wordSpacing: -0.5),)
+            style: TextStyle(fontSize: 7.sp, letterSpacing: 0.2, wordSpacing: 0.2),)
         ],),
       ),),
   ): Container(
