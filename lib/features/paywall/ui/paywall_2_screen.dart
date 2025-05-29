@@ -192,7 +192,7 @@ class Paywall2Screen extends StatelessWidget {
               Positioned(
                 right: 0.sp,
                   child: Image.asset(
-                "assets/images/special_discount.png", height: 35.sp,))
+                "assets/images/special_discount.png", height: 35.sp, width: 100.sp,))
 
             ],
           )
